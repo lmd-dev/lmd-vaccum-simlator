@@ -1,4 +1,4 @@
-# lmd-vaccum-simulator
+# LMD Vaccum Simulator
 
 ## Project setup
 ```
