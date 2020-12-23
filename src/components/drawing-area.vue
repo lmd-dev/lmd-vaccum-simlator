@@ -5,10 +5,11 @@
 </template>
 
 <script lang="ts">
+import { Ultrasound } from "@/models/core/sensors/ultrasound";
 import { Options, Vue } from "vue-class-component";
-import { Block } from "./../models/core/tangible-objects/block";
-import { Cylinder } from "./../models/core/tangible-objects/cylinder";
-import { Robot } from "./../models/core/tangible-objects/movable-objects/robot";
+import { Block } from "@/models/core/tangible-objects/block";
+import { Cylinder } from "@/models/core/tangible-objects/cylinder";
+import { Robot } from "@/models/core/tangible-objects/movable-objects/robot";
 
 @Options({
   data: function () {
@@ -121,8 +122,31 @@ import { Robot } from "./../models/core/tangible-objects/movable-objects/robot";
       this.ctx.strokeStyle = "black";
       this.ctx.stroke();
 
+      robot.sensors.forEach((sensor) => {
+        if(sensor instanceof Ultrasound)
+          this.drawUltrasound(sensor);
+      })
+
       this.ctx.restore();
     },
+    drawUltrasound(ultrasound: Ultrasound)
+    {
+      this.ctx.save();
+      this.ctx.translate(ultrasound.position.x, ultrasound.position.z);
+      this.ctx.rotate(-ultrasound.rotation.y);
+
+      this.ctx.beginPath();
+      this.ctx.moveTo(0, 0);
+      this.ctx.rotate(ultrasound.horizontalAngle / 2);
+      this.ctx.lineTo(ultrasound.maxDistance, 0);
+      this.ctx.rotate(-ultrasound.horizontalAngle);
+      this.ctx.lineTo(ultrasound.maxDistance, 0);
+
+      this.ctx.fillStyle = "#78b7ff6e";
+      this.ctx.fill();
+
+      this.ctx.restore();
+    }
   },
 })
 export default class CDrawingArea extends Vue {}
