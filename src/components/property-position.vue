@@ -5,7 +5,7 @@
         <h2>Position</h2>
         <div class="field">
           <label>X</label>
-          <input type="number" v-model.number="object.position.x" />
+          <input type="number" v-model.number="object.position.x"  />
         </div>
         <div class="field">
           <label>Y</label>
@@ -43,9 +43,26 @@ import { BasicObject } from "./../models/core/basic-object";
 @Options({
   props: {
     object: BasicObject,
+  },
+  methods: {
+    forceRender: function() {
+      this.$forceUpdate();
+
+      this._refreshTimer = setTimeout(() => {this.forceRender();}, 100);
+    }
+  },
+  mounted: function()
+  {
+    this.forceRender();
+  },
+  beforeUnmount: function()
+  {
+    clearTimeout(this._refreshTimer);
   }
 })
-export default class CPropertyPosition extends Vue {}
+export default class CPropertyPosition extends Vue {
+  private _refreshTimer: TimerHandler;
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

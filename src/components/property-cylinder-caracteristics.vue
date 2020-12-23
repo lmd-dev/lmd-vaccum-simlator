@@ -22,7 +22,7 @@ import { Cylinder } from "./../models/core/tangible-objects/cylinder";
     cylinder: Cylinder,
   },
 })
-export default class CPropertyCaracteristicsCylinder extends Vue {}
+export default class CPropertyCylinderCaracteristics extends Vue {}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

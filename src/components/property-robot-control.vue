@@ -57,7 +57,7 @@ import { Robot } from "./../models/core/tangible-objects/movable-objects/robot";
     this._keyPressEvent = null;
   },
 })
-export default class CPropertyControlRobot extends Vue {
+export default class CPropertyRobotControl extends Vue {
   //Event handler associated with the keepress event ilstener of window. Needed to remove it when the component is destroyed 
   private _keyPressEvent : unknown;
 }

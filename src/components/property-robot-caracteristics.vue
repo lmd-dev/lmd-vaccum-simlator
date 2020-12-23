@@ -26,7 +26,7 @@ import { Robot } from "./../models/core/tangible-objects/movable-objects/robot";
     robot: Robot,
   },
 })
-export default class CPropertyCaracteristicsRobot extends Vue {}
+export default class CPropertyRobotCaracteristics extends Vue {}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

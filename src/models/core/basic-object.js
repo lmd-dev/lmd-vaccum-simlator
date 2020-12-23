@@ -32,9 +32,21 @@ export class BasicObject extends Serialize {
     get position() { return this._position; }
     get rotation() { return this._rotation; }
     //Returns the absolute position of the object
-    get absolutePosition() { return new Vector3(); }
+    get absolutePosition() {
+        let absolutePosition = new Vector3();
+        absolutePosition.copy(this.rotation);
+        if (this.parent)
+            absolutePosition.move(this.parent.absolutePosition);
+        return absolutePosition;
+    }
     //returns the absolute rotation angles of the object
-    get absoluteRotation() { return new Vector3(); }
+    get absoluteRotation() {
+        let absoluteRotation = new Vector3();
+        absoluteRotation.copy(this.rotation);
+        if (this.parent)
+            absoluteRotation.move(this.parent.absoluteRotation);
+        return absoluteRotation;
+    }
 }
 __decorate([
     serializable()

@@ -4,15 +4,9 @@ import { Robot } from "./tangible-objects/movable-objects/robot";
 export class TangibleObjectFactory {
     static create(type, environment, parent = null) {
         switch (type) {
-            case 'robot':
-                return new Robot("Robot", environment);
-                break;
-            case 'block':
-                return new Block("Block", environment);
-                break;
-            case 'cylinder':
-                return new Cylinder("Cylinder", environment);
-                break;
+            case 'robot': return new Robot("Robot", environment);
+            case 'block': return new Block("Block", environment, parent);
+            case 'cylinder': return new Cylinder("Cylinder", environment, parent);
             default: throw `Unknown object type '${type}'.`;
         }
     }

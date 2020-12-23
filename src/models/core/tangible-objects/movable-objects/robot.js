@@ -3,6 +3,9 @@ import { Vector3 } from "../../../math/vector";
 import { serializable } from "../../../serialize/serialize";
 import { MovableObject } from "../../movable-object";
 import { Sensor } from "../../sensor";
+import { SensorFactory } from "../../sensor-factory";
+import { Compass } from "../../sensors/compass";
+import { Ultrasound } from "../../sensors/ultrasound";
 /**
  * Represents the robot in the simulation environment
  */
@@ -22,9 +25,9 @@ export class Robot extends MovableObject {
         this._diameter = 250;
         this._linearSpeed = 100;
         this._angularSpeed = Math.PI / 4;
+        this._sensors = new Array();
         this.lastIteration = null;
         this.loop();
-        this.moveForward();
     }
     get diameter() { return this._diameter; }
     set diameter(value) { this._diameter = value; }
@@ -35,7 +38,23 @@ export class Robot extends MovableObject {
     get currentLinearSpeed() { return this._currentLinearSpeed; }
     get currentAngularSpeed() { return this._currentAngularSpeed; }
     get sensors() { return this._sensors; }
-    set sensors(v) { this._sensors = v; }
+    /**
+     *
+     * @param type Add sensor of the given type to the robot
+     * @returns Added sensor
+     */
+    addSensor(type) {
+        try {
+            let sensor = SensorFactory.create(type, this.environment, this);
+            this.sensors.push(sensor);
+            console.log(this.sensors);
+            return sensor;
+        }
+        catch (e) {
+            console.error(e);
+            return null;
+        }
+    }
     /**
      * Loop function of the robot
      */
@@ -46,6 +65,13 @@ export class Robot extends MovableObject {
             elapsedTime = now - this.lastIteration;
         }
         this.updatePosition(elapsedTime);
+        //Update sensors for test
+        this.sensors.forEach((sensor) => {
+            if (sensor instanceof Compass)
+                sensor.measureDirection();
+            else if (sensor instanceof Ultrasound)
+                sensor.measureDistance();
+        });
         this.lastIteration = now;
         setTimeout(() => { this.loop(); }, 100);
     }

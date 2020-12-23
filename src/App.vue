@@ -64,6 +64,12 @@ h2 {
   margin-top: 0;
 }
 
+h3 {
+  font-size:12px;
+  font-weight: bold; 
+  text-transform: uppercase;
+}
+
 hr {
   height: 1px;
   border: none;
@@ -71,7 +77,7 @@ hr {
   margin: 20px 0 20px 0;
 }
 
-input {
+input, select {
   padding: 5px;
   box-sizing: border-box;
   border: 1px solid #aaa;

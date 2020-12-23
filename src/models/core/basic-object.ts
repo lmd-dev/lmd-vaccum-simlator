@@ -43,10 +43,28 @@ export abstract class BasicObject extends Serialize
     public get rotation(): Vector3 { return this._rotation; }
 
     //Returns the absolute position of the object
-    public get absolutePosition(): Vector3 { return new Vector3(); }
+    public get absolutePosition(): Vector3
+    {
+        let absolutePosition = new Vector3();
+        absolutePosition.copy(this.rotation);
+
+        if (this.parent)
+            absolutePosition.move(this.parent.absolutePosition);
+
+        return absolutePosition;
+    }
 
     //returns the absolute rotation angles of the object
-    public get absoluteRotation(): Vector3 { return new Vector3(); }
+    public get absoluteRotation(): Vector3
+    {
+        let absoluteRotation = new Vector3();
+        absoluteRotation.copy(this.rotation);
+
+        if (this.parent)
+            absoluteRotation.move(this.parent.absoluteRotation);
+
+        return absoluteRotation;
+    }
 
     /**
      * Constructor

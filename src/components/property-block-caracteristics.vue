@@ -26,7 +26,7 @@ import { Block } from "./../models/core/tangible-objects/block";
     block: Block,
   },
 })
-export default class CPropertyCaracteristicsBlock extends Vue {}
+export default class CPropertyBlockCaracteristics extends Vue {}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

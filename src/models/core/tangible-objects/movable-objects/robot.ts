@@ -3,6 +3,9 @@ import { serializable } from "../../../serialize/serialize";
 import { Environment } from "../../environment";
 import { MovableObject } from "../../movable-object";
 import { Sensor } from "../../sensor";
+import { SensorFactory } from "../../sensor-factory";
+import { Compass } from "../../sensors/compass";
+import { Ultrasound } from "../../sensors/ultrasound";
 
 /**
  * Represents the robot in the simulation environment
@@ -39,7 +42,6 @@ export class Robot extends MovableObject
     @serializable(Sensor, { list: true })
     private _sensors: Sensor[];
     public get sensors(): Sensor[] { return this._sensors; }
-    public set sensors(v: Sensor[]) { this._sensors = v; }
 
     /**
      * Constructor
@@ -58,10 +60,32 @@ export class Robot extends MovableObject
         this._diameter = 250;
         this._linearSpeed = 100;
         this._angularSpeed = Math.PI / 4;
+        this._sensors = new Array<Sensor>();
         this.lastIteration = null;
 
         this.loop();
-        this.moveForward();
+    }
+
+    /**
+     * 
+     * @param type Add sensor of the given type to the robot
+     * @returns Added sensor
+     */
+    addSensor(type: string): Sensor
+    {
+        try {
+            let sensor = SensorFactory.create(type, this.environment, this);
+            this.sensors.push(sensor);
+        console.log(this.sensors);
+
+            return sensor;
+        }
+        catch(e)
+        {
+            console.error(e);
+            return null;
+        }
+
     }
 
     /**
@@ -78,6 +102,14 @@ export class Robot extends MovableObject
         }
 
         this.updatePosition(elapsedTime);
+
+        //Update sensors for test
+        this.sensors.forEach((sensor) => {
+            if(sensor instanceof Compass)
+                sensor.measureDirection();
+            else if(sensor instanceof Ultrasound)
+                sensor.measureDistance();
+        });
 
         this.lastIteration = now;
 
