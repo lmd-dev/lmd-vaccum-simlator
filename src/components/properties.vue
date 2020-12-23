@@ -4,6 +4,8 @@
     <CPropertyPosition :object="$root.selectedObject" />
     <CPropertyBlockCaracteristics v-if="$root.selectedObject.type === 'block'" :block="$root.selectedObject" />
     <CPropertyCylinderCaracteristics v-if="$root.selectedObject.type === 'cylinder'" :cylinder="$root.selectedObject" />
+    <CPropertyCompassCaracteristics v-if="$root.selectedObject.type === 'compass'" :compass="$root.selectedObject" />
+    <CPropertyUltrasoundCaracteristics v-if="$root.selectedObject.type === 'ultrasound'" :ultrasound="$root.selectedObject" />
     <CPropertyRobotCaracteristics v-if="$root.selectedObject.type === 'robot'" :robot="$root.selectedObject" />
     <CPropertyRobotControl v-if="$root.selectedObject.type === 'robot'" :robot="$root.selectedObject" />
     <CPropertyRobotSensors v-if="$root.selectedObject.type === 'robot'" :robot="$root.selectedObject" />
@@ -20,6 +22,8 @@ import CPropertyInformation from "./property-information.vue";
 import CPropertyPosition from "./property-position.vue";
 import CPropertyBlockCaracteristics from "./property-block-caracteristics.vue";
 import CPropertyCylinderCaracteristics from "./property-cylinder-caracteristics.vue";
+import CPropertyCompassCaracteristics from "./property-compass-caracteristics.vue";
+import CPropertyUltrasoundCaracteristics from "./property-ultrasound-caracteristics.vue";
 import CPropertyRobotCaracteristics from "./property-robot-caracteristics.vue";
 import CPropertyRobotControl from "./property-robot-control.vue";
 import CPropertyRobotSensors from "./property-robot-sensors.vue";
@@ -30,6 +34,8 @@ import CPropertyRobotSensors from "./property-robot-sensors.vue";
     CPropertyPosition,
     CPropertyBlockCaracteristics,
     CPropertyCylinderCaracteristics,
+    CPropertyCompassCaracteristics,
+    CPropertyUltrasoundCaracteristics,
     CPropertyRobotCaracteristics,
     CPropertyRobotControl,
     CPropertyRobotSensors,

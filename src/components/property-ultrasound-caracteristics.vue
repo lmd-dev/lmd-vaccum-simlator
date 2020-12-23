@@ -1,10 +1,23 @@
 <template>
   <div class="property-panel" v-if="ultrasound !== undefined">
-    <h3>{{ultrasound.name}} (ultrasound)</h3>
+    <h2>Caracteristics</h2>
+    <div class="field">
+      <label>Min. distance</label>
+      <input type="number" v-model.number="ultrasound.minDistance" />
+    </div>
+    <div class="field">
+      <label>Max. distance</label>
+      <input type="number" v-model.number="ultrasound.maxDistance" />
+    </div>
+    <div class="field">
+      <label>Horizontal angle</label>
+      <input type="number" v-model.number="ultrasound.horizontalAngle" />
+    </div>
     <div class="field">
       <label>Distance</label>
       <input type="text" readonly v-model.number="distance" />
     </div>
+    <hr />
   </div>
 </template>
 
@@ -16,13 +29,6 @@ import { Ultrasound } from "./../models/core/sensors/ultrasound";
   props: {
     ultrasound: Ultrasound,
   },
-  methods: {
-    forceRender: function() {
-      this.$forceUpdate();
-
-      this._refreshTimer = setTimeout(() => {this.forceRender();}, 100);
-    }
-  },
   computed: {
     distance: function()
     {
@@ -31,21 +37,14 @@ import { Ultrasound } from "./../models/core/sensors/ultrasound";
       else
         return this.ultrasound.lastDistance;
     }
-  },
-  mounted: function()
-  {
-    this.forceRender();
-  },
-  beforeUnmount: function()
-  {
-    clearTimeout(this._refreshTimer);
   }
 })
-export default class CSensorUltrasound extends Vue {}
+export default class CPropertyUltrasoundCaracteristics extends Vue {}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-input[readonly] {
+input[readonly]{
   text-align: right;
-}</style>
+}
+</style>

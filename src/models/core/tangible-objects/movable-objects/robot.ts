@@ -76,7 +76,6 @@ export class Robot extends MovableObject
         try {
             let sensor = SensorFactory.create(type, this.environment, this);
             this.sensors.push(sensor);
-        console.log(this.sensors);
 
             return sensor;
         }
