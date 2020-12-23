@@ -1,0 +1,19 @@
+.field {
+    display: flex;
+    margin-bottom: 6px;
+    align-items: center;
+}
+
+.field:last-child {
+    margin-bottom: 0;
+}
+
+.field label {
+    width: 100px;
+    flex-shrink: 0;
+}
+
+.field input {
+    width: 100%;
+    margin-left: 10px;
+}
