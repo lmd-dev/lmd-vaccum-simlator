@@ -1,21 +1,18 @@
-import { PathSection } from "./path-section";
+import { Vector3 } from "../math/vector";
 
 /**
  * Represents a path of an object. Used to detect collision between tangible objects
  */
 export class Path
 {
-    /**
-     * Linear sections of the path
-     */
-    private _items : PathSection[];
-    public get items() : PathSection[] { return this._items; }
-    
+    private _points : Vector3[];
+    public get points() : Vector3[] { return this._points; }
+        
     /**
      * Constructor
      */
     constructor()
     {
-        this._items = new Array<PathSection>();
+        this._points = new Array<Vector3>();
     }
 }

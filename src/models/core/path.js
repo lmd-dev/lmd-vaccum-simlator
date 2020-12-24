@@ -6,8 +6,8 @@ export class Path {
      * Constructor
      */
     constructor() {
-        this._items = new Array();
+        this._points = new Array();
     }
-    get items() { return this._items; }
+    get points() { return this._points; }
 }
 //# sourceMappingURL=path.js.map
