@@ -1,5 +1,5 @@
 /**
- * Represents a path of an object. Used to detect collision between tangible objects
+ * Represents a path used to defined the contour of an object or the trajectory of a robot
  */
 export class Path {
     /**

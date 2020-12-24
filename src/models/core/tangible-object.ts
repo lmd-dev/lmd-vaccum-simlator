@@ -1,6 +1,6 @@
 import { BasicObject } from './basic-object';
 import { Environment } from './environment';
-import { Path } from './path';
+import { PathsManager } from './paths-manager';
 
 /**
  * Represents a tangible object
@@ -8,10 +8,10 @@ import { Path } from './path';
 export abstract class TangibleObject extends BasicObject
 {
     /**
-     * Paths used to detect collisions with other tangible object
+     * Contour of the tangilble object, used to detect collisions with other tangible objects
      */
-    private _paths : Path[];
-    public get paths() : Path[] { return this._paths; }
+    private _contour : PathsManager;
+    public get contour() : PathsManager { return this._contour; }
     
     /**
      * Constructor
@@ -24,7 +24,7 @@ export abstract class TangibleObject extends BasicObject
     {
         super(type, name, environment, parent);
 
-        this._paths = new Array<Path>();
+        this._contour = new PathsManager;
     }
 
     /**
@@ -32,11 +32,11 @@ export abstract class TangibleObject extends BasicObject
      */
     update()
     {
-        this.updatePath();
+        this.updateContour();
     }
 
     /**
-     * Updates paths of the object
+     * Updates contour of the object
      */
-    abstract updatePath();
+    abstract updateContour();
 }

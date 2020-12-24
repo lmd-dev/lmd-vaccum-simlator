@@ -77,7 +77,7 @@ export class Robot extends MovableObject {
     /**
      * Updates tangible path of the robot
      */
-    updatePath() {
+    updateContour() {
     }
     /**
      * Starts robot move forward

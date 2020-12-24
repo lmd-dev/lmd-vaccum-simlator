@@ -1,4 +1,5 @@
 import { BasicObject } from './basic-object';
+import { PathsManager } from './paths-manager';
 /**
  * Represents a tangible object
  */
@@ -12,14 +13,14 @@ export class TangibleObject extends BasicObject {
      */
     constructor(type, name, environment, parent) {
         super(type, name, environment, parent);
-        this._paths = new Array();
+        this._contour = new PathsManager;
     }
-    get paths() { return this._paths; }
+    get contour() { return this._contour; }
     /**
      * Updates the object
      */
     update() {
-        this.updatePath();
+        this.updateContour();
     }
 }
 //# sourceMappingURL=tangible-object.js.map

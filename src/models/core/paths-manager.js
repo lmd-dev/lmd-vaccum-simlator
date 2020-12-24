@@ -1,4 +1,10 @@
+/**
+ * Manages paths and all associates features
+ */
 export class PathsManager {
+    /**
+     * Constructor
+     */
     constructor() {
         this._paths = new Array();
     }

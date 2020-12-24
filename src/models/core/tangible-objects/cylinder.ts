@@ -34,7 +34,7 @@ export class Cylinder extends TangibleObject
     /**
      * Updates tangible path of the cylinder
      */
-    updatePath()
+    updateContour()
     {
 
     }

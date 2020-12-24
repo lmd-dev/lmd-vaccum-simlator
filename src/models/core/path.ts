@@ -1,10 +1,11 @@
 import { Vector3 } from "../math/vector";
 
 /**
- * Represents a path of an object. Used to detect collision between tangible objects
+ * Represents a path used to defined the contour of an object or the trajectory of a robot
  */
 export class Path
 {
+    //Points of the path
     private _points : Vector3[];
     public get points() : Vector3[] { return this._points; }
         

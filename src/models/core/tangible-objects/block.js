@@ -24,7 +24,7 @@ export class Block extends TangibleObject {
     /**
      * Updates the tangible path of the bloc
      */
-    updatePath() {
+    updateContour() {
     }
 }
 //# sourceMappingURL=block.js.map
