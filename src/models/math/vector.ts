@@ -1,3 +1,4 @@
+import { onUpdated } from "vue";
 import { Serialize } from "../serialize/serialize";
 import { serializable } from "../serialize/serialize";
 
@@ -7,30 +8,41 @@ export class Vector3 extends Serialize
 	@serializable()
     private _x: number;
     public get x(): number { return this._x; };
-    public set x(value: number) { this._x = value; };
+    public set x(value: number) { this._x = value; this.update(); };
 
 	//Y coordinate
 	@serializable()
     private _y: number;
     public get y(): number { return this._y; };
-    public set y(value: number) { this._y = value; };
+    public set y(value: number) { this._y = value; this.update(); };
 
 	//Z coordinate
 	@serializable()
     private _z: number;
     public get z(): number { return this._z; };
-    public set z(value: number) { this._z = value; };
+	public set z(value: number) { this._z = value; this.update(); };
+	
+	//Updating function to call
+	private _onUpdate: Function | null;
 
 	/**
 	 * Constructor
 	 */
-	constructor(x: number = 0, y:number = 0, z:number = 0)
+	constructor(x: number = 0, y:number = 0, z:number = 0, onUpdate: Function = null)
 	{
 		super();
 
         this._x = x;
 		this._y = y;
-        this._z = z;
+		this._z = z;
+		
+		this._onUpdate = onUpdate;
+	}
+
+	private update()
+	{
+		if(this._onUpdate)
+			this._onUpdate();
 	}
 
 	/**
@@ -41,9 +53,11 @@ export class Vector3 extends Serialize
 	 */
 	setXYZ(x: number, y: number, z: number = this._z)
 	{
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		this._x = x;
+		this._y = y;
+		this._z = z;
+
+		this.update();
 	}
 
 	/**
@@ -90,9 +104,7 @@ export class Vector3 extends Serialize
 	 */
 	move(point: Vector3): Vector3
 	{
-        this.x += point.x;
-        this.y += point.y;
-        this.z += point.z;
+        this.setXYZ(this.x + point.x, this.y + point.y, this.z + point.z);
 
         return this;
 	}

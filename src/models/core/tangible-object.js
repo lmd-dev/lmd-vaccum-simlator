@@ -14,6 +14,7 @@ export class TangibleObject extends BasicObject {
     constructor(type, name, environment, parent) {
         super(type, name, environment, parent);
         this._contour = new PathsManager;
+        this.update();
     }
     get contour() { return this._contour; }
     /**

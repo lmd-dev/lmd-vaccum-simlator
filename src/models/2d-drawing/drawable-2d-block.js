@@ -24,6 +24,16 @@ export class Drawable2DBlock extends Block {
         context.rect(-this.width / 2, -this.depth / 2, this.width, this.depth);
         context.fill();
         context.stroke();
+        //Drawing of the contour
+        context.beginPath();
+        context.strokeStyle = "blue";
+        this.contour.last?.points.forEach((point, index) => {
+            if (index == 0)
+                context.moveTo(point.x - this.position.x, point.z - this.position.z);
+            else
+                context.lineTo(point.x - this.position.x, point.z - this.position.z);
+        });
+        context.stroke();
         context.restore();
     }
 }

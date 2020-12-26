@@ -1,3 +1,4 @@
+import { Vector3 } from "@/models/math/vector";
 import { BasicObject } from "../basic-object";
 import { Environment } from "../environment";
 import { TangibleObject } from "../tangible-object";
@@ -43,6 +44,26 @@ export class Block extends TangibleObject
      */
     updateContour()
     {
+        let contour = this.contour.last || this.contour.createPath();
+        
+        contour.clear();
+    
+        let point = new Vector3();
+        point.copy(this.position);
 
+        point.move(new Vector3(-this.width / 2, 0, -this.depth / 2));
+        contour.addPoint(point);
+
+        point.x += this.width;
+        contour.addPoint(point);
+
+        point.z += this.depth;
+        contour.addPoint(point);
+
+        point.x -= this.width;
+        contour.addPoint(point);
+
+        point.z -= this.depth;
+        contour.addPoint(point);
     }
 }

@@ -24,6 +24,16 @@ export class Drawable2DCylinder extends Cylinder {
         context.arc(0, 0, this.diameter / 2, 0, Math.PI * 2);
         context.fill();
         context.stroke();
+        //Drawing of the contour
+        context.beginPath();
+        context.strokeStyle = "blue";
+        this.contour.last?.points.forEach((point, index) => {
+            if (index == 0)
+                context.moveTo(point.x - this.position.x, point.z - this.position.z);
+            else
+                context.lineTo(point.x - this.position.x, point.z - this.position.z);
+        });
+        context.stroke();
         context.restore();
     }
 }

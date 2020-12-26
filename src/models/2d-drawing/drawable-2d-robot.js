@@ -33,6 +33,17 @@ export class Drawable2DRobot extends Robot {
             if (sensor.draw)
                 sensor.draw(context);
         });
+        //Drawing of the contour
+        context.beginPath();
+        context.strokeStyle = "blue";
+        context.lineWidth = 3;
+        this.contour.last?.points.forEach((point, index) => {
+            if (index == 0)
+                context.moveTo(point.x - this.position.x, point.z - this.position.z);
+            else
+                context.lineTo(point.x - this.position.x, point.z - this.position.z);
+        });
+        context.stroke();
         context.restore();
     }
 }

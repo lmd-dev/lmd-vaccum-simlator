@@ -16,4 +16,23 @@ export class Path
     {
         this._points = new Array<Vector3>();
     }
+
+    /**
+     * Clears the list of points
+     */
+    clear()
+    {
+        this._points.length = 0;
+    }
+
+    /**
+     * Adds a point at the end ot the list
+     * @param point Point to add
+     */
+    addPoint(point: Vector3)
+    {
+        let p = new Vector3();
+        p.copy(point);
+        this.points.push(p);
+    }
 }

@@ -19,8 +19,8 @@ export class BasicObject extends Serialize {
         this._parent = parent;
         this._children = new Array();
         this._environment = environment;
-        this._position = new Vector3();
-        this._rotation = new Vector3();
+        this._position = new Vector3(0, 0, 0, () => this.update());
+        this._rotation = new Vector3(0, 0, 0, () => this.update());
     }
     get type() { return this._type; }
     get name() { return this._name; }
@@ -46,6 +46,8 @@ export class BasicObject extends Serialize {
         if (this.parent)
             absoluteRotation.move(this.parent.absoluteRotation);
         return absoluteRotation;
+    }
+    update() {
     }
 }
 __decorate([

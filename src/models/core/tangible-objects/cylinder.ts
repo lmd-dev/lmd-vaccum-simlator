@@ -1,3 +1,4 @@
+import { Vector3 } from "@/models/math/vector";
 import { BasicObject } from "../basic-object";
 import { Environment } from "../environment";
 import { TangibleObject } from "../tangible-object";
@@ -36,6 +37,21 @@ export class Cylinder extends TangibleObject
      */
     updateContour()
     {
+        let contour = this.contour.last || this.contour.createPath();
+        
+        contour.clear();
+    
+        let point = new Vector3();
+        point.copy(this.position);
+        point.x += this.diameter / 2;
 
+        let angleStep = Math.PI / 16;
+        for(let i = 0; i <= Math.PI * 2; i += angleStep)
+        {
+            contour.addPoint(point);
+            point.rotateY(this.position, angleStep);
+        }
+
+        contour.addPoint(point);
     }
 }

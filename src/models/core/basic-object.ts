@@ -82,8 +82,13 @@ export abstract class BasicObject extends Serialize
         this._parent = parent;
         this._children = new Array<BasicObject>();
         this._environment = environment;
-        this._position = new Vector3();
-        this._rotation = new Vector3();
+        this._position = new Vector3(0, 0, 0, () => this.update());
+        this._rotation = new Vector3(0, 0, 0, () => this.update());
+    }
+
+    update()
+    {
+
     }
 }
 

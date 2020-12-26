@@ -25,6 +25,8 @@ export abstract class TangibleObject extends BasicObject
         super(type, name, environment, parent);
 
         this._contour = new PathsManager;
+
+        this.update();
     }
 
     /**

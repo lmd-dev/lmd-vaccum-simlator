@@ -5,24 +5,29 @@ export class Vector3 extends Serialize {
     /**
      * Constructor
      */
-    constructor(x = 0, y = 0, z = 0) {
+    constructor(x = 0, y = 0, z = 0, onUpdate = null) {
         super();
         this._x = x;
         this._y = y;
         this._z = z;
+        this._onUpdate = onUpdate;
     }
     get x() { return this._x; }
     ;
-    set x(value) { this._x = value; }
+    set x(value) { this._x = value; this.update(); }
     ;
     get y() { return this._y; }
     ;
-    set y(value) { this._y = value; }
+    set y(value) { this._y = value; this.update(); }
     ;
     get z() { return this._z; }
     ;
-    set z(value) { this._z = value; }
+    set z(value) { this._z = value; this.update(); }
     ;
+    update() {
+        if (this._onUpdate)
+            this._onUpdate();
+    }
     /**
      * Defines the three coordinates in one shot
      * @param x
@@ -30,9 +35,10 @@ export class Vector3 extends Serialize {
      * @param z
      */
     setXYZ(x, y, z = this._z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this._x = x;
+        this._y = y;
+        this._z = z;
+        this.update();
     }
     /**
      * Includes the points in the bounding box result
@@ -74,9 +80,7 @@ export class Vector3 extends Serialize {
      * Moves the point coordinates
      */
     move(point) {
-        this.x += point.x;
-        this.y += point.y;
-        this.z += point.z;
+        this.setXYZ(this.x + point.x, this.y + point.y, this.z + point.z);
         return this;
     }
     /**
