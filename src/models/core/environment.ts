@@ -1,5 +1,5 @@
 import { BasicObject } from "./basic-object";
-import { TangibleObject } from "./tangible-object";
+import { SensorFactory } from "./sensor-factory";
 import { TangibleObjectFactory } from "./tangible-object-factory";
 
 /**
@@ -21,18 +21,33 @@ export class Environment
     public get objects(): BasicObject[] { return this._objects; }
 
     /**
+     * Factory used to create tangible objects
+     */
+    private readonly _tangibleObjectFactory : TangibleObjectFactory;
+    public get tangibleObjectFactory() : TangibleObjectFactory { return this._tangibleObjectFactory; }
+
+    /**
+     * Factory used to create sensors
+     */
+    private readonly _sensorFactory : SensorFactory;
+    public get sensorFactory() : SensorFactory { return this._sensorFactory; }
+    
+
+    /**
      * Constructor
      */
-    constructor()
+    constructor(tangibleObjectFactory: TangibleObjectFactory, sensorFactory: SensorFactory)
     {
         this._name = "New environment";
         this._objects = new Array<BasicObject>();
+        this._tangibleObjectFactory = tangibleObjectFactory;
+        this._sensorFactory = sensorFactory;
     }
 
     addObject(type: string): BasicObject
     {
         try {
-            const o = TangibleObjectFactory.create(type, this);
+            const o = this.tangibleObjectFactory.create(type, this);
             this.objects.push(o);
             return o;
         }

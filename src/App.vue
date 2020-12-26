@@ -10,6 +10,8 @@ import CContent from './components/content.vue';
 import { BasicObject } from './models/core/basic-object';
 import { Environment } from './models/core/environment';
 import { Robot } from './models/core/tangible-objects/movable-objects/robot';
+import { Drawable2DTangibleObjectFactory} from './models/2d-drawing/drawable-2d-tangible-object-factory';
+import { Drawable2DSensorFactory} from './models/2d-drawing/drawable-2d-sensor-factory';
 
 @Options({
   components: {
@@ -19,7 +21,7 @@ import { Robot } from './models/core/tangible-objects/movable-objects/robot';
   data: function()
   {
     return {
-      environment: new Environment(),
+      environment: new Environment(new Drawable2DTangibleObjectFactory(), new Drawable2DSensorFactory()),
       selectedObject: null,
     }
   },

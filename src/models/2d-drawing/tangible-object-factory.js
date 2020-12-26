@@ -1,17 +1,8 @@
 import { Block } from "./tangible-objects/block";
 import { Cylinder } from "./tangible-objects/cylinder";
 import { Robot } from "./tangible-objects/movable-objects/robot";
-/**
- * Tangible objects factory
- */
 export class TangibleObjectFactory {
-    /**
-     * Creates a tangible object from its type name
-     * @param type Type of the object to create
-     * @param environment Environment where the created object will envolve
-     * @param parent Parent of the object
-     */
-    create(type, environment, parent = null) {
+    static create(type, environment, parent = null) {
         switch (type) {
             case 'robot': return new Robot("Robot", environment);
             case 'block': return new Block("Block", environment, parent);

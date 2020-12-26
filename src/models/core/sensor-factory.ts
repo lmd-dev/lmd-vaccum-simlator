@@ -3,11 +3,16 @@ import { Environment } from "./environment";
 import { Sensor } from "./sensor";
 import { Compass } from "./sensors/compass";
 import { Ultrasound } from "./sensors/ultrasound";
-import { Robot } from "./tangible-objects/movable-objects/robot";
 
 export class SensorFactory
 {
-    static create(type: string, environment: Environment, parent: BasicObject): Sensor
+    /**
+     * Creates a sensor from its type name
+     * @param type Type of the sensor to create
+     * @param environment Environment where the sensor will envolve
+     * @param parent Parent of the sensor
+     */
+    create(type: string, environment: Environment, parent: BasicObject): Sensor
     {
         switch(type)
         {

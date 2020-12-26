@@ -3,7 +3,6 @@ import { Vector3 } from "../../../math/vector";
 import { serializable } from "../../../serialize/serialize";
 import { MovableObject } from "../../movable-object";
 import { Sensor } from "../../sensor";
-import { SensorFactory } from "../../sensor-factory";
 import { Compass } from "../../sensors/compass";
 import { Ultrasound } from "../../sensors/ultrasound";
 /**
@@ -45,7 +44,7 @@ export class Robot extends MovableObject {
      */
     addSensor(type) {
         try {
-            let sensor = SensorFactory.create(type, this.environment, this);
+            let sensor = this.environment.sensorFactory.create(type, this.environment, this);
             this.sensors.push(sensor);
             return sensor;
         }
